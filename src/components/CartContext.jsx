@@ -38,6 +38,11 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const deleteFromCart = (idMeal) => {
+    setCart((prevCart) => prevCart.filter((item) => item.idMeal !== idMeal));
+  };
+  
+
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
   };
@@ -48,9 +53,17 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, getTotalItems, getCartTotal }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        deleteFromCart,  // Add deleteFromCart to the value
+        getTotalItems,
+        getCartTotal,
+      }}
     >
       {children}
     </CartContext.Provider>
   );
+  
 };
